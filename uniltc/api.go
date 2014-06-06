@@ -46,7 +46,7 @@ type history struct {
 	Rate, Volume, Total float64
 }
 
-type order struct {
+type Order struct {
 	OrderId             int64
 	OrderType           string
 	Rate, Volume, Total float64
@@ -54,7 +54,7 @@ type order struct {
 
 type depth struct {
 	Timestamp int64
-	OrderBook map[string][]order
+	Depth     map[string][]Order
 }
 
 type candleStick struct {
@@ -73,10 +73,10 @@ type stub struct {
 	CandleStick   func(pair string, candleStickType string) ([]candleStick, error)
 
 	// private api
-	ApiNewBidOrder    func(api_key string, res string, pair string, rate int64, amount int64) ([]order, interface{}, error)
-	ApiNewAskOrder    func(api_key string, res string, pair string, rate int64, amount int64) ([]order, interface{}, error)
+	ApiNewBidOrder    func(api_key string, res string, pair string, rate int64, amount int64) ([]Order, interface{}, error)
+	ApiNewAskOrder    func(api_key string, res string, pair string, rate int64, amount int64) ([]Order, interface{}, error)
 	ApiCancelBidOrder func(api_key string, res string, pair string, orderId int64) error
 	ApiCancelAskOrder func(api_key string, res string, pair string, orderId int64) error
-	ApiCurrentOrders  func(api_key string, res string, pair string) (map[string][]order, error)
+	ApiCurrentOrders  func(api_key string, res string, pair string) (map[string][]Order, error)
 	ApiHistoryTrades  func(api_key string, res string, pair string) ([]history, error)
 }
